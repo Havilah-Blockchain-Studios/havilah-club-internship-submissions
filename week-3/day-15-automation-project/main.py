@@ -8,8 +8,7 @@
 # Submit the complete project (this file + data folder + README.md) to GitHub.
 
 import os
-# import shutil   # uncomment if using File Organiser
-# import csv      # uncomment if using Report Generator or Data Cleaner
+import shutil
 
 
 # ── Configuration ─────────────────────────────────────────────────────────────
@@ -24,8 +23,22 @@ OUTPUT_PATH = "data/output/"
 # Each function should do one thing.
 
 def process(input_path, output_path):
-    # TODO: implement your chosen project logic here
-    pass
+    os.makedirs(output_path, exist_ok=True)
+
+    for filename in os.listdir(input_path):
+        source_path = os.path.join(input_path, filename)
+
+        if os.path.isfile(source_path):
+            extension = os.path.splitext(filename)[1].lower().lstrip(".")
+
+            if extension:
+                folder = os.path.join(output_path, extension)
+                os.makedirs(folder, exist_ok=True)
+
+                destination = os.path.join(folder, filename)
+                shutil.move(source_path, destination)
+
+                print(f"Moved {filename} -> {extension}/")
 
 
 # ── Main ──────────────────────────────────────────────────────────────────────

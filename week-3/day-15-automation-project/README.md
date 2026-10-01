@@ -1,28 +1,28 @@
-# Day 15 — Python Automation Project
+Day 15 — Python Automation Project
 
-## What does this project do?
+What does this project do?
 
-<!-- Describe your project in 2-3 sentences. What problem does it solve? What does it automate? -->
+This project automatically organises files in a folder based on their file extensions. It scans the input folder, creates folders for different file types, and moves each file into the appropriate folder.
 
-## Project Type
+Project Type
 
-<!-- State which option you chose: File Organiser / Report Generator / Data Cleaner -->
+File Organiser
 
-## Requirements
+Requirements
 
-<!-- List any Python libraries needed beyond the standard library -->
+No additional Python libraries are required. The project uses Python's standard library modules:
 
-```
-# example
-pip install <library-name>
-```
+- "os"
+- "shutil"
 
-## How to run
+How to run
 
-```bash
 python main.py
-```
 
-## Example output
+Example output
 
-<!-- Paste or screenshot the output your script produces when run on the sample data -->
+Starting automation...
+Moved notes.txt -> txt/
+Moved readme.md -> md/
+Moved students.csv -> csv/
+Done.

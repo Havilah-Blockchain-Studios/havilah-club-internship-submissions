@@ -4,8 +4,8 @@
 
 import csv
 
-INPUT_FILE = "data/sample.csv"
-OUTPUT_FILE = "data/output.csv"
+INPUT_FILE = "week-3/day-13-working-with-data/data/sample.csv"
+OUTPUT_FILE = "week-3/day-13-working-with-data/data/output.csv"
 
 
 # ── Step 1: Load CSV ──────────────────────────────────────────────────────────
@@ -13,7 +13,14 @@ OUTPUT_FILE = "data/output.csv"
 
 def load_data(filepath):
     rows = []
-    # TODO: open the file and read rows into the list
+
+    with open(filepath, newline="", encoding="utf-8") as file:
+        reader = csv.DictReader(file)
+
+        for row in reader:
+            row["score"] = int(row["score"])
+            rows.append(row)
+
     return rows
 
 
@@ -22,8 +29,14 @@ def load_data(filepath):
 # For any numeric column, print the minimum, maximum, and average values.
 
 def print_summary(rows):
-    # TODO: implement summary statistics
-    pass
+    print(f"Total rows: {len(rows)}")
+
+    if rows:
+        scores = [row["score"] for row in rows]
+
+        print(f"Minimum score: {min(scores)}")
+        print(f"Maximum score: {max(scores)}")
+        print(f"Average score: {sum(scores) / len(scores):.2f}")
 
 
 # ── Step 3: Filter Data ───────────────────────────────────────────────────────
@@ -32,7 +45,11 @@ def print_summary(rows):
 
 def filter_data(rows):
     filtered = []
-    # TODO: define and apply your filter condition
+
+    for row in rows:
+        if row["score"] >= 70:
+            filtered.append(row)
+
     return filtered
 
 
@@ -40,8 +57,14 @@ def filter_data(rows):
 # Sort the filtered data by one column and write the result to OUTPUT_FILE.
 
 def save_data(rows, filepath):
-    # TODO: sort rows by a column, then write to CSV
-    pass
+    rows = sorted(rows, key=lambda row: row["score"], reverse=True)
+
+    with open(filepath, "w", newline="", encoding="utf-8") as file:
+        fieldnames = ["name", "score", "grade"]
+        writer = csv.DictWriter(file, fieldnames=fieldnames)
+
+        writer.writeheader()
+        writer.writerows(rows)
 
 
 # ── Main ──────────────────────────────────────────────────────────────────────
