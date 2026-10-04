@@ -1,42 +1,73 @@
-# Day 12 — Python Logic and Functions
-# Task: Build a Python utility using conditionals, loops, and functions.
-# Submit this script with a working menu system.
+# Day 12 - Python Logic & Functions
+# Mbamalu Samuel Oluebubechukwu
 
-
-# ── Function 1: Grade Calculator ─────────────────────────────────────────────
-# Takes a score (0-100) and returns the letter grade.
-# A = 70+, B = 60-69, C = 50-59, D = 40-49, F = below 40
-
+# Exercise 1: Grade Calculator
 def calculate_grade(score):
-    # TODO: implement grade logic
-    pass
+    if score >= 70:
+        return "A"
+    elif score >= 60:
+        return "B"
+    elif score >= 50:
+        return "C"
+    elif score >= 40:
+        return "D"
+    else:
+        return "F"
 
 
-# ── Function 2: Multiplication Table ─────────────────────────────────────────
-# Asks the user to enter a number and prints its full multiplication table (1-12).
-# Repeats until the user types 'quit'.
-
+# Exercise 2: Multiplication Table
 def multiplication_table():
-    # TODO: implement loop and table logic
-    pass
+    while True:
+        user_input = input("Enter a number (or 'quit' to stop): ")
+        if user_input.lower() == "quit":
+            break
+
+        try:
+            number = int(user_input)
+        except ValueError:
+            print("That's not a valid number. Try again.")
+            continue
+
+        for i in range(1, 13):
+            print(f"{number} x {i} = {number * i}")
 
 
-# ── Function 3: Your Choice ───────────────────────────────────────────────────
-# Define a third function of your choice — e.g. calculate_area(), convert_currency(),
-# or check_palindrome().
+# Exercise 3: Palindrome Checker
+def check_palindrome():
+    text = input("Enter a word or phrase to check: ")
+    cleaned = text.lower().replace(" ", "")
+    if cleaned == cleaned[::-1]:
+        print(f"'{text}' is a palindrome.")
+    else:
+        print(f"'{text}' is not a palindrome.")
 
-def your_function():
-    # TODO: implement your chosen function
-    pass
 
-
-# ── Main Menu ─────────────────────────────────────────────────────────────────
-# Display a simple menu so the user can pick which function to run.
-# Include try/except to handle invalid input (e.g. text entered instead of a number).
-
+# Main Menu
 def main():
-    # TODO: build the menu here
-    pass
+    while True:
+        print("\n----- MENU -----")
+        print("1. Grade Calculator")
+        print("2. Multiplication Table")
+        print("3. Palindrome Checker")
+        print("4. Quit")
+
+        choice = input("Choose an option (1-4): ")
+
+        try:
+            if choice == "1":
+                score = int(input("Enter a score (0-100): "))
+                print(f"Grade: {calculate_grade(score)}")
+            elif choice == "2":
+                multiplication_table()
+            elif choice == "3":
+                check_palindrome()
+            elif choice == "4":
+                print("Goodbye!")
+                break
+            else:
+                print("Invalid option. Please choose 1-4.")
+        except ValueError:
+            print("Invalid input. Please enter a number where expected.")
 
 
 if __name__ == "__main__":

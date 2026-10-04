@@ -1,38 +1,83 @@
-# Day 15 — Python Automation Project
-# Choose one project type and implement it here:
+# Day 15 - Automation Project: File Organiser
+# Scans a folder and sorts its files into subfolders based on file extension.
 #
-#   A) File Organiser  — scans a folder and moves files into subfolders by extension
-#   B) Report Generator — reads a CSV and produces a formatted text summary
-#   C) Data Cleaner    — removes duplicate rows, strips whitespace, standardises columns
+# Plan (Input -> Process -> Output):
+#   Input:   a folder path containing a mix of files
+#   Process: read each file's extension, create a matching subfolder if
+#            needed, and move the file into it
+#   Output:  the same folder, now organised into extension-named subfolders
 #
-# Submit the complete project (this file + data folder + README.md) to GitHub.
+# Edge cases handled:
+#   1. The input folder does not exist
+#   2. The input folder is empty (nothing to organise)
+#   3. A file has no extension (grouped into "no_extension")
+#   4. A destination file with the same name already exists (renamed, not overwritten)
 
 import os
-# import shutil   # uncomment if using File Organiser
-# import csv      # uncomment if using Report Generator or Data Cleaner
+import shutil
+
+SOURCE_FOLDER = "test_folder"
 
 
-# ── Configuration ─────────────────────────────────────────────────────────────
-# Set your input/output paths here so they are easy to find and change.
-
-INPUT_PATH = "data/"
-OUTPUT_PATH = "data/output/"
-
-
-# ── Core Functions ─────────────────────────────────────────────────────────────
-# Break your project into small, clearly named functions.
-# Each function should do one thing.
-
-def process(input_path, output_path):
-    # TODO: implement your chosen project logic here
-    pass
+def get_target_folder(filename):
+    """Return the subfolder name a file should be moved into, based on its extension."""
+    _, extension = os.path.splitext(filename)
+    if extension == "":
+        return "no_extension"
+    return extension[1:].lower() + "_files"
 
 
-# ── Main ──────────────────────────────────────────────────────────────────────
+def build_destination_path(folder_path, filename):
+    """
+    Return a safe destination path inside folder_path for filename.
+    If a file with that name already exists there, add a number
+    (e.g. notes_1.txt) instead of overwriting it.
+    """
+    destination = os.path.join(folder_path, filename)
+    if not os.path.exists(destination):
+        return destination
+
+    name, extension = os.path.splitext(filename)
+    counter = 1
+    while True:
+        new_name = f"{name}_{counter}{extension}"
+        destination = os.path.join(folder_path, new_name)
+        if not os.path.exists(destination):
+            return destination
+        counter += 1
+
+
+def organise_folder(source_folder):
+    """Scan source_folder and move each file into an extension-based subfolder."""
+    if not os.path.isdir(source_folder):
+        print(f"Error: the folder '{source_folder}' does not exist.")
+        return
+
+    entries = os.listdir(source_folder)
+    files = [f for f in entries if os.path.isfile(os.path.join(source_folder, f))]
+
+    if not files:
+        print(f"'{source_folder}' has no files to organise.")
+        return
+
+    moved_count = 0
+    for filename in files:
+        source_path = os.path.join(source_folder, filename)
+        target_folder_name = get_target_folder(filename)
+        target_folder_path = os.path.join(source_folder, target_folder_name)
+
+        os.makedirs(target_folder_path, exist_ok=True)
+
+        destination_path = build_destination_path(target_folder_path, filename)
+        shutil.move(source_path, destination_path)
+        print(f"Moved: {filename} -> {target_folder_name}/")
+        moved_count += 1
+
+    print(f"\nDone. {moved_count} file(s) organised in '{source_folder}'.")
+
+
 def main():
-    print("Starting automation...")
-    process(INPUT_PATH, OUTPUT_PATH)
-    print("Done.")
+    organise_folder(SOURCE_FOLDER)
 
 
 if __name__ == "__main__":
