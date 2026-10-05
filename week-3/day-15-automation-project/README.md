@@ -2,27 +2,43 @@
 
 ## What does this project do?
 
-<!-- Describe your project in 2-3 sentences. What problem does it solve? What does it automate? -->
+A Python program that reads a CSV file of names and scores and produces a formatted text report. The report is printed on screen and saved to data/output/report.txt.
+
 
 ## Project Type
 
-<!-- State which option you chose: File Organiser / Report Generator / Data Cleaner -->
+Report Generator
 
 ## Requirements
 
-<!-- List any Python libraries needed beyond the standard library -->
+- Python 3
+- No extra libraries needed (uses the built-in csv and os modules)
+- A CSV file at data/scores.csv with name and score columns
 
-```
-# example
-pip install <library-name>
-```
 
 ## How to run
 
-```bash
-python main.py
-```
+1. Open a terminal in the day-15-automation-project folder.
+2. Run:
+  
+   python main.py
+   
 
 ## Example output
 
-<!-- Paste or screenshot the output your script produces when run on the sample data -->
+Starting automation...
+==============================
+     SCORE REPORT
+==============================
+Number of records : 8
+Average score     : 78.25
+Highest score     : 95
+Lowest score      : 54
+==============================
+Report saved to .../data/output/report.txt
+
+## Edge Cases Handled
+
+- Missing input file: prints a clear error and stops
+- Empty file or missing score column: prints an error and stops
+- Blank or non-number scores: skipped, with a note showing how man

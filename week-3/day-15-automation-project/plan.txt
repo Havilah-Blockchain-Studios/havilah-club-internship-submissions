@@ -1,0 +1,12 @@
+INPUT
+- A file called scores.csv with two columns: name and score (8 records)
+
+PROCESS
+1. Open and read scores.csv
+2. Collect all the scores as numbers
+3. Calculate the count, average, highest and lowest score
+4. Build a formatted text report
+
+OUTPUT
+- A report printed on screen and saved to report.txt
+- It shows: number of records, average score, highest score, lowest score
