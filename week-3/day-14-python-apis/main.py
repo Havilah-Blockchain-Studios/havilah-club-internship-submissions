@@ -1,42 +1,64 @@
-# Day 14 — Python and APIs
-# Task: Build a Python program that retrieves information from an API
-# and processes the JSON response to produce a useful output.
-# Submit this script + a screenshot of the printed output.
-
 import requests
-import os
 
-# Load your API key from the environment (never hardcode it here).
-# Copy .env.example to .env and fill in your key before running.
-API_KEY = os.getenv("API_KEY", "")
-BASE_URL = ""  # TODO: set your chosen API's base URL
+BASE_URL = "https://world.openfoodfacts.org/api/v2/search"
 
 
-# ── Step 1: Fetch Data ────────────────────────────────────────────────────────
-# Make a GET request to the API and return the parsed JSON response.
-# Handle network errors and non-200 status codes gracefully.
+def fetch_data(category):
+    params = {
+        "categories_tags": category,
+        "fields": "product_name,brands,nutriscore_grade",
+        "page_size": 5,
+    }
+    headers = {"User-Agent": "HavilahDay14FoodApp/1.0 (student project)"}
 
-def fetch_data(query):
-    # TODO: build params dict and call requests.get()
-    # TODO: check response.status_code before calling .json()
-    pass
+    try:
+        response = requests.get(BASE_URL, params=params, headers=headers, timeout=10)
+    except requests.exceptions.RequestException as error:
+        print("Network problem, could not reach the API:", error)
+        return None
+
+    print("Status code:", response.status_code)
+    print("Request URL:", response.url)
+
+    if response.status_code == 200:
+        return response.json()
+    else:
+        print("The API returned an error. Status code:", response.status_code)
+        return None
 
 
-# ── Step 2: Parse and Display ─────────────────────────────────────────────────
-# Extract at least 3 useful pieces of information from the response.
-# Print them in a clear, labelled format — not raw JSON.
+def display_results(data, category):
+    print()
+    print("=" * 40)
+    print("Food products in category:", category)
+    print("Total products found:", data["count"])
+    print("Showing:", len(data["products"]))
+    print("=" * 40)
+    print()
 
-def display_results(data):
-    # TODO: navigate the JSON structure and print each field with a label
-    pass
+    if len(data["products"]) == 0:
+        print("No products found. Try a category like 'biscuits'.")
+        return
+
+    number = 1
+    for product in data["products"]:
+        name = product.get("product_name", "Unknown")
+        brand = product.get("brands", "Unknown")
+        grade = product.get("nutriscore_grade", "Unknown")
+
+        print(str(number) + ". " + name)
+        print("   Brand:", brand)
+        print("   Nutri-Score:", grade.upper())
+        print("-" * 40)
+
+        number = number + 1
 
 
-# ── Main ──────────────────────────────────────────────────────────────────────
 def main():
-    query = input("Enter your search query: ")
-    data = fetch_data(query)
+    category = input("Enter a food category (e.g. breakfast-cereals): ")
+    data = fetch_data(category)
     if data:
-        display_results(data)
+        display_results(data, category)
 
 
 if __name__ == "__main__":
