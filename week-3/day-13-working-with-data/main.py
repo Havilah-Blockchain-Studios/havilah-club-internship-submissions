@@ -4,8 +4,8 @@
 
 import csv
 
-INPUT_FILE = "data/sample.csv"
-OUTPUT_FILE = "data/output.csv"
+INPUT_FILE = "week-3/day-13-working-with-data/data/game_store.csv"
+OUTPUT_FILE = "week-3/day-13-working-with-data/data/game_store_filtered.csv"
 
 
 # ── Step 1: Load CSV ──────────────────────────────────────────────────────────
@@ -13,7 +13,14 @@ OUTPUT_FILE = "data/output.csv"
 
 def load_data(filepath):
     rows = []
-    # TODO: open the file and read rows into the list
+    with open(filepath, "r", newline="") as groot:
+        reader = csv.DictReader(groot)
+        for row in reader:
+            row["title"] = row["title"].strip()
+            row["category"] = row["category"].strip()
+            row["price"] = float(row["price"])
+            row["quantity"] = int(row["quantity"])
+            rows.append(row)
     return rows
 
 
@@ -22,8 +29,14 @@ def load_data(filepath):
 # For any numeric column, print the minimum, maximum, and average values.
 
 def print_summary(rows):
-    # TODO: implement summary statistics
-    pass
+    prices = []
+    for row in rows:
+        prices.append(row["price"])
+
+    print("Total records:", len(rows))
+    print("Minimum price:", min(prices))
+    print("Maximum price:", max(prices))
+    print("Average price:", sum(prices) / len(prices))
 
 
 # ── Step 3: Filter Data ───────────────────────────────────────────────────────
@@ -32,7 +45,9 @@ def print_summary(rows):
 
 def filter_data(rows):
     filtered = []
-    # TODO: define and apply your filter condition
+    for row in rows:
+        if row["category"] == "Action RPG":
+            filtered.append(row)
     return filtered
 
 
@@ -40,8 +55,13 @@ def filter_data(rows):
 # Sort the filtered data by one column and write the result to OUTPUT_FILE.
 
 def save_data(rows, filepath):
-    # TODO: sort rows by a column, then write to CSV
-    pass
+    rows.sort(key= lambda x: x["price"], reverse=True)
+    with open(filepath, "w", newline="") as groot:
+        fieldnames = ["title", "category", "price", "quantity"]
+        writer = csv.DictWriter(groot, fieldnames=fieldnames)
+        writer.writeheader()
+        for row in rows:
+            writer.writerow(row)
 
 
 # ── Main ──────────────────────────────────────────────────────────────────────
