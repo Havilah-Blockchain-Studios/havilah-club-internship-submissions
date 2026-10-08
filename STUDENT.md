@@ -6,13 +6,13 @@ Fill in every field below before your first commit. This file is how instructors
 
 | Field | Your Answer |
 |-------|-------------|
-| Full Name | |
-| GitHub Username | |
-| Email Address | |
-| Phone / WhatsApp | |
+| Full Name | OKEKE CHISOM JACKSON
+| GitHub Username | Apexgj
+| Email Address | chidijackson3@gmail.com
+| Phone / WhatsApp | 09050293723
 | Cohort | Havilah Club Internship — Cohort |
-| Programme Start Date | |
-| LinkedIn Profile | |
+| Programme Start Date | 7-09-2026
+| X Profile |  https://x.com/Apexmilitian1
 
 ---
 
@@ -22,7 +22,7 @@ Write 2–3 sentences describing what you specifically want to be able to do by 
 
 > Replace this line with your learning objective.
 
----
+I want to have full knowledge of AI and successfully automate day to day tasks
 
 ## How to update this file
 

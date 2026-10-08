@@ -1,57 +1,75 @@
-# Day 13 — Working With Data
-# Task: Load a CSV, manipulate lists and dicts, clean data, and print a summary.
-# Submit this script along with your original CSV and the output CSV.
+    # Day 13 — Working With Data
+    # Task: Load a CSV, manipulate lists and dicts, clean data, and print a summary.
+    # Submit this script along with your original CSV and the output CSV.
 
+
+    # ── Step 1: Load CSV ──────────────────────────────────────────────────────────
+    # Open the CSV file using csv.DictReader and read each row into a list of dicts.
+    
+    
+    
 import csv
-
-INPUT_FILE = "data/sample.csv"
-OUTPUT_FILE = "data/output.csv"
-
-
-# ── Step 1: Load CSV ──────────────────────────────────────────────────────────
-# Open the CSV file using csv.DictReader and read each row into a list of dicts.
-
 def load_data(filepath):
-    rows = []
-    # TODO: open the file and read rows into the list
+        rows = []
+        with open(filepath, "r", newline="") as file:
+            reader = csv.DictReader(file)
+            for row in reader:
+                rows.append(row)
+            return rows
+
+
+
+    # ── Step 3: clean data ───────────────────────────────────────────────────────
+
+def clean_data(rows):
+    for row in rows:
+        row["Price"] = float(row["Price"].replace("N", ""))
+        row["Quantity"] = int(row["Quantity"])
     return rows
+rows=load_data("C:\\Users\\chidi\\Downloads\\Day 13 task - task (1).csv")
+cleaned_rows = clean_data(rows)
+print(cleaned_rows)
 
-
-# ── Step 2: Print Summary ─────────────────────────────────────────────────────
-# Print the total number of rows.
-# For any numeric column, print the minimum, maximum, and average values.
-
+    # ── Step 4: Analyze Data 
 def print_summary(rows):
-    # TODO: implement summary statistics
-    pass
+    total_records = len(rows)
 
+    prices = [row["Price"] for row in rows]
+    min_price = min(prices)
+    max_price = max(prices)
+    avg_price = sum(prices) / len(prices)
 
-# ── Step 3: Filter Data ───────────────────────────────────────────────────────
-# Return only the rows where a specific column meets a condition.
-# Example: score above 70, or price below 50.
+    print(f"Total records: {total_records}")
+    print(f"Minimum Price: {min_price}")
+    print(f"Maximum Price: {max_price}")
+    print(f"Average Price: {avg_price:.2f}")
 
-def filter_data(rows):
-    filtered = []
-    # TODO: define and apply your filter condition
+rows = load_data("C:\\Users\\chidi\\Downloads\\Day 13 task - task (1).csv")
+cleaned_rows = clean_data(rows)
+print_summary(cleaned_rows)
+
+    #Filter data
+    
+def filter_data(cleaned_rows):
+    filtered =[]
+    for row in cleaned_rows:
+        if row["Price"] > 15000:
+            filtered.append(row)
     return filtered
-
-
-# ── Step 4: Sort and Export ───────────────────────────────────────────────────
-# Sort the filtered data by one column and write the result to OUTPUT_FILE.
-
+filtered_rows = filter_data(cleaned_rows)
+print("\nproducts with Price greater than 15000:")
+for row in filtered_rows:
+    print(row)
+    
+    
+    #sort and save data
 def save_data(rows, filepath):
-    # TODO: sort rows by a column, then write to CSV
-    pass
-
-
-# ── Main ──────────────────────────────────────────────────────────────────────
-def main():
-    rows = load_data(INPUT_FILE)
-    print_summary(rows)
-    filtered = filter_data(rows)
-    save_data(filtered, OUTPUT_FILE)
-    print(f"Done. {len(filtered)} rows written to {OUTPUT_FILE}")
-
-
-if __name__ == "__main__":
-    main()
+    sorted_rows = sorted(rows, key=lambda row: row["Price"], reverse=True)
+    with open(filepath, "w", newline="") as file:
+        writer = csv.DictWriter(file, fieldnames=["Product", "Price", "Quantity"])
+        writer.writeheader()
+        writer.writerows(sorted_rows)
+Google_Drive = "week-3/day-13-working-with-data/data/output.csv"
+output_filepath = Google_Drive
+save_data(filtered_rows, output_filepath)
+print("\nData saved to Google_Drive")
