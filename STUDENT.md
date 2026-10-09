@@ -6,12 +6,12 @@ Fill in every field below before your first commit. This file is how instructors
 
 | Field | Your Answer |
 |-------|-------------|
-| Full Name | |
-| GitHub Username | |
-| Email Address | |
-| Phone / WhatsApp | |
+| Full Name |Nwite Ekene David |
+| GitHub Username | Eliora29-UltimateX |
+| Email Address | nwiteekene67@gmail.com |
+| Phone / WhatsApp | 09160236703 |
 | Cohort | Havilah Club Internship — Cohort |
-| Programme Start Date | |
+| Programme Start Date | 07 sept.,2026 |
 | LinkedIn Profile | |
 
 ---
@@ -20,7 +20,7 @@ Fill in every field below before your first commit. This file is how instructors
 
 Write 2–3 sentences describing what you specifically want to be able to do by the end of the 8 weeks.
 
-> Replace this line with your learning objective.
+> I hope to gain practical Technical skills, redemptive Innovation  skill and improve my problem solving ability, and learn how to apply AI, Software, Electronics and Automation to real-world engineering problem.
 
 ---
 
@@ -31,7 +31,7 @@ Write 2–3 sentences describing what you specifically want to be able to do by 
 3. Save the file.
 4. Commit it:
    ```bash
-   git add STUDENT.md
+   n
    git commit -m "feat: add student profile"
    git push
    ```
