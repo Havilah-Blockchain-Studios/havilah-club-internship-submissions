@@ -1,21 +1,21 @@
-name,score,grade
-Alice,85,A
-Bob,72,A
-Charlie,63,B
-Diana,91,A
-Ethan,48,D
-Fatima,55,C
-George,38,F
-Hannah,76,A
-Isaac,60,B
-Jade,82,A
-Kwame,47,D
-Lydia,93,A
-Marcus,59,C
-Nadia,71,A
-Oscar,35,F
-Priya,88,A
-Quincy,52,C
-Rachel,67,B
-Samuel,44,D
-Tolu,79,A
+name,price,quantity,category
+Wireless-Mouse,15.99, 120 ,electronics
+BLUETOOTH_SPEAKER,45.50,60,Electronics
+office/chair,89.99 , 25,FURNITURE
+Note_book,  3.25,300,stationery
+Desk-Lamp,22.75,80 ,furniture
+ballpoint_pen, 1.20,500,STATIONERY
+Laptop/Stand,34.00,45,ElEcTrOnIcS
+Water_Bottle ,9.99,150,accessories
+BACK-PACK,39.95, 70,Accessories
+usb_cable,7.50,200, electronics
+White/board,55.00,15,Stationery
+Head-Phones,65.99,90,electronics
+Filing_Cabinet ,  120.00,10,furniture
+sticky-notes,2.99,400,STATIONERY
+Coffee_Mug,6.50, 180,accessories
+Monitor/Stand, 28.40,35,Electronics
+desk_organizer,14.30,95,FURNITURE
+Highlighter-Pack,4.75,250, stationery
+PHONE_CASE,11.99,140,Accessories
+External/Hard-Drive,79.99,50,electronics
