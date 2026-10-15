@@ -1,6 +1,4 @@
 # Day 13 — Working With Data
-# Task: Load a CSV, manipulate lists and dicts, clean data, and print a summary.
-# Submit this script along with your original CSV and the output CSV.
 
 import csv
 
@@ -8,43 +6,51 @@ INPUT_FILE = "data/sample.csv"
 OUTPUT_FILE = "data/output.csv"
 
 
-# ── Step 1: Load CSV ──────────────────────────────────────────────────────────
-# Open the CSV file using csv.DictReader and read each row into a list of dicts.
+
 
 def load_data(filepath):
     rows = []
-    # TODO: open the file and read rows into the list
+    with open(filepath, mode = 'r', newline= '') as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            rows.append(row)
     return rows
 
 
-# ── Step 2: Print Summary ─────────────────────────────────────────────────────
-# Print the total number of rows.
-# For any numeric column, print the minimum, maximum, and average values.
+
 
 def print_summary(rows):
-    # TODO: implement summary statistics
-    pass
+    print("Total records:", len(rows))
+
+    scores = [int(row["score"])for row in rows]
+
+    print("Minimum score:", min(scores))
+    print("Maximum score:", max(scores))
+    print("Average score:", sum(scores) / len(scores))
 
 
-# ── Step 3: Filter Data ───────────────────────────────────────────────────────
-# Return only the rows where a specific column meets a condition.
-# Example: score above 70, or price below 50.
+
 
 def filter_data(rows):
     filtered = []
-    # TODO: define and apply your filter condition
+    for row in rows:
+        if int(row["score"]) > 70:
+            filtered.append(row)
     return filtered
 
 
-# ── Step 4: Sort and Export ───────────────────────────────────────────────────
-# Sort the filtered data by one column and write the result to OUTPUT_FILE.
 
 def save_data(rows, filepath):
-    # TODO: sort rows by a column, then write to CSV
-    pass
+    sorted_rows = sorted(rows, key=lambda row: int(row["score"]))
+
+    with open(filepath, mode= 'w', newline='') as file:
+        writer = csv.DictWriter(file, fieldnames = ["name", "score", "grade"])
+        writer.writeheader()
+        writer.writerows(sorted_rows)
+    
 
 
-# ── Main ──────────────────────────────────────────────────────────────────────
+
 def main():
     rows = load_data(INPUT_FILE)
     print_summary(rows)

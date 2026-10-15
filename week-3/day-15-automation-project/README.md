@@ -2,15 +2,15 @@
 
 ## What does this project do?
 
-<!-- Describe your project in 2-3 sentences. What problem does it solve? What does it automate? -->
+This project automatically organises messy folders by scanning all files inside a given directory and sorting them into subfolders based on their file extension. it solves the problem of manually sorting downloaded or saved filed, automating what would otherwise be a repetitive manual task
 
 ## Project Type
 
-<!-- State which option you chose: File Organiser / Report Generator / Data Cleaner -->
+file organiser
 
 ## Requirements
 
-<!-- List any Python libraries needed beyond the standard library -->
+None.This project only uses python's built-in os and shutil modules.
 
 ```
 # example
@@ -25,4 +25,5 @@ python main.py
 
 ## Example output
 
-<!-- Paste or screenshot the output your script produces when run on the sample data -->
+Starting automation...
+Done.

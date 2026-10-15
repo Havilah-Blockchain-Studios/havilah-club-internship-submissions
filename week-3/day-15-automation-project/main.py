@@ -1,31 +1,27 @@
 # Day 15 — Python Automation Project
-# Choose one project type and implement it here:
-#
-#   A) File Organiser  — scans a folder and moves files into subfolders by extension
-#   B) Report Generator — reads a CSV and produces a formatted text summary
-#   C) Data Cleaner    — removes duplicate rows, strips whitespace, standardises columns
-#
-# Submit the complete project (this file + data folder + README.md) to GitHub.
 
 import os
-# import shutil   # uncomment if using File Organiser
-# import csv      # uncomment if using Report Generator or Data Cleaner
+import shutil  
 
-
-# ── Configuration ─────────────────────────────────────────────────────────────
-# Set your input/output paths here so they are easy to find and change.
 
 INPUT_PATH = "data/"
 OUTPUT_PATH = "data/output/"
 
 
-# ── Core Functions ─────────────────────────────────────────────────────────────
-# Break your project into small, clearly named functions.
-# Each function should do one thing.
-
 def process(input_path, output_path):
-    # TODO: implement your chosen project logic here
-    pass
+    files = os.listdir(input_path)
+    for filename in files:
+        full_path = os.path.join(input_path, filename)
+        if os.path.isfile(full_path):
+            extension = os.path.splitext(filename)[1].replace(".", "")
+            if extension == "":
+                extension = "no_extension"
+            folder_path = os.path.join(output_path, extension)
+            os.makedirs(folder_path, exist_ok = True)
+            shutil.move(full_path, os.path.join(folder_path, filename))
+
+
+    
 
 
 # ── Main ──────────────────────────────────────────────────────────────────────
