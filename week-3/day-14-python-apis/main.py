@@ -9,7 +9,7 @@ import os
 # Load your API key from the environment (never hardcode it here).
 # Copy .env.example to .env and fill in your key before running.
 API_KEY = os.getenv("API_KEY", "")
-BASE_URL = ""  # TODO: set your chosen API's base URL
+BASE_URL = "https://api.open-meteo.com/v1/forecast"  
 
 
 # ── Step 1: Fetch Data ────────────────────────────────────────────────────────
@@ -17,9 +17,25 @@ BASE_URL = ""  # TODO: set your chosen API's base URL
 # Handle network errors and non-200 status codes gracefully.
 
 def fetch_data(query):
-    # TODO: build params dict and call requests.get()
-    # TODO: check response.status_code before calling .json()
-    pass
+    # We use a free public weather API that needs no API key
+    url = "https://api.open-meteo.com/v1/forecast"
+    
+    # Build your parameters dictionary
+    params = {
+        "latitude": 51.50,
+        "longitude": -0.12,
+        "current_weather": True
+    }
+    
+    # Make the GET request
+    response = requests.get(url, params=params)
+    
+    # Check if the status code is 200 (Success) before returning .json()
+    if response.status_code == 200:
+        return response.json()
+    else:
+        print(f"Failed to fetch data. Status code: {response.status_code}")
+        return None
 
 
 # ── Step 2: Parse and Display ─────────────────────────────────────────────────
@@ -27,13 +43,25 @@ def fetch_data(query):
 # Print them in a clear, labelled format — not raw JSON.
 
 def display_results(data):
-    # TODO: navigate the JSON structure and print each field with a label
-    pass
+    # Extract the current weather dictionary from the JSON response
+    weather = data.get("current_weather", {})
+    
+    temperature = weather.get("temperature")
+    windspeed = weather.get("windspeed")
+    is_day = weather.get("is_day")
+    
+    # Print the extracted information cleanly with labels
+    print("\n--- API Data Results ---")
+    print(f"City / Location: London")
+    print(f"Current Temperature: {temperature}°C")
+    print(f"Wind Speed: {windspeed} km/h")
+    print(f"Is it daytime?: {'Yes' if is_day == 1 else 'No'}")
+    print("------------------------\n")
 
 
 # ── Main ──────────────────────────────────────────────────────────────────────
 def main():
-    query = input("Enter your search query: ")
+    query = input("London")
     data = fetch_data(query)
     if data:
         display_results(data)
