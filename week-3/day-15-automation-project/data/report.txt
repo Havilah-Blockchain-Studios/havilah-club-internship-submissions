@@ -1,0 +1,4 @@
+Total Records: 8
+Average Score: 72.38
+Highest Score: 90.0
+Lowest Score: 45.0

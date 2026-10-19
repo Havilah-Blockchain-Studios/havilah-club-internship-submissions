@@ -4,40 +4,26 @@
 # Submit this script + a screenshot of the printed output.
 
 import requests
-import os
 
-# Load your API key from the environment (never hardcode it here).
-# Copy .env.example to .env and fill in your key before running.
-API_KEY = os.getenv("API_KEY", "")
-BASE_URL = ""  # TODO: set your chosen API's base URL
+def get_data(limit):
+    try:
+        res = requests.get(
+            "https://api.coinlore.com/api/tickers/",
+            params={"start": 0, "limit": limit},
+        )
+        print("URL:", res.url)
+        print("Status:", res.status_code)
+        if res.status_code == 200:
+            return res.json()
+        return None
+    except requests.exceptions.RequestException:
+        print("Network error")
+        return None
+data = get_data(3)
 
-
-# ── Step 1: Fetch Data ────────────────────────────────────────────────────────
-# Make a GET request to the API and return the parsed JSON response.
-# Handle network errors and non-200 status codes gracefully.
-
-def fetch_data(query):
-    # TODO: build params dict and call requests.get()
-    # TODO: check response.status_code before calling .json()
-    pass
-
-
-# ── Step 2: Parse and Display ─────────────────────────────────────────────────
-# Extract at least 3 useful pieces of information from the response.
-# Print them in a clear, labelled format — not raw JSON.
-
-def display_results(data):
-    # TODO: navigate the JSON structure and print each field with a label
-    pass
-
-
-# ── Main ──────────────────────────────────────────────────────────────────────
-def main():
-    query = input("Enter your search query: ")
-    data = fetch_data(query)
-    if data:
-        display_results(data)
-
-
-if __name__ == "__main__":
-    main()
+if data:
+    for coin in data["data"]:
+        print("Name :", coin["name"])
+        print("Price: $", coin["price_usd"])
+        print("Rank :", coin["rank"])
+        print("_" * 20)
