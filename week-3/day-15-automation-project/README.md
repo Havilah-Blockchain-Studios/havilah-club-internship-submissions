@@ -1,28 +1,52 @@
-# Day 15 — Python Automation Project
+Day 15 — Python Automation Project
 
-## What does this project do?
+Project: Report Generator
 
-<!-- Describe your project in 2-3 sentences. What problem does it solve? What does it automate? -->
+This project is a Python automation tool that reads student scores from a CSV file, processes the data, and creates a simple score report.
 
-## Project Type
+Requirements
 
-<!-- State which option you chose: File Organiser / Report Generator / Data Cleaner -->
+- Python 3
+- Python standard library ("csv")
 
-## Requirements
+How It Works
 
-<!-- List any Python libraries needed beyond the standard library -->
+Input → Process → Output
 
-```
-# example
-pip install <library-name>
-```
+1. Read student names and scores from "data/scores.csv".
+2. Check that the CSV has the required columns.
+3. Clean the names and convert scores to numbers.
+4. Calculate:
+   - Number of records
+   - Average score
+   - Highest score
+   - Lowest score
+5. Save the results in "data/report.txt".
 
-## How to run
+How to Run
 
-```bash
+Open the terminal in the Day 15 project folder and run:
+
 python main.py
-```
 
-## Example output
+Expected Output
 
-<!-- Paste or screenshot the output your script produces when run on the sample data -->
+The program creates "data/report.txt" containing a report like:
+
+STUDENT SCORE REPORT
+====================
+Number of records: 8
+Average score: 77.38
+Highest score: 93.0
+Lowest score: 55.0
+
+Edge Cases Tested
+
+The program was tested for:
+
+- Missing input file
+- Invalid score values
+- Blank values
+- Missing required CSV columns
+
+The program handles these cases without crashing.

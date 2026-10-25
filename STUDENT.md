@@ -6,13 +6,13 @@ Fill in every field below before your first commit. This file is how instructors
 
 | Field | Your Answer |
 |-------|-------------|
-| Full Name | |
-| GitHub Username | |
-| Email Address | |
-| Phone / WhatsApp | |
+| Full Name |Asana-Kennedy Prince-Rhema Kamsinyo |
+| GitHub Username |Prince-rhema |
+| Email Address |kennedykamsinyo@gmail.com |
+| Phone / WhatsApp |08140598073 |
 | Cohort | Havilah Club Internship — Cohort |
-| Programme Start Date | |
-| LinkedIn Profile | |
+| Programme Start Date |7th September |
+| LinkedIn Profile |princerhema1107 |
 
 ---
 
@@ -20,7 +20,7 @@ Fill in every field below before your first commit. This file is how instructors
 
 Write 2–3 sentences describing what you specifically want to be able to do by the end of the 8 weeks.
 
-> Replace this line with your learning objective.
+> To grasp the entire idea and attain essential skillsss in AI Automation and Robotics
 
 ---
 

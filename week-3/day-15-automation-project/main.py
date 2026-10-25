@@ -1,34 +1,85 @@
 # Day 15 — Python Automation Project
-# Choose one project type and implement it here:
-#
-#   A) File Organiser  — scans a folder and moves files into subfolders by extension
-#   B) Report Generator — reads a CSV and produces a formatted text summary
-#   C) Data Cleaner    — removes duplicate rows, strips whitespace, standardises columns
-#
-# Submit the complete project (this file + data folder + README.md) to GitHub.
+# Project: Report Generator
 
 import os
-# import shutil   # uncomment if using File Organiser
-# import csv      # uncomment if using Report Generator or Data Cleaner
+import csv
+
+INPUT_PATH = "data/scores.csv"
+OUTPUT_PATH = "data/report.txt"
 
 
-# ── Configuration ─────────────────────────────────────────────────────────────
-# Set your input/output paths here so they are easy to find and change.
+def read_scores(input_path):
+    records = []
 
-INPUT_PATH = "data/"
-OUTPUT_PATH = "data/output/"
+    try:
+        with open(input_path, "r", newline="") as file:
+            reader = csv.DictReader(file)
+
+            if not reader.fieldnames or "Name" not in reader.fieldnames or "Score" not in reader.fieldnames:
+                print("Error: CSV must have Name and Score columns.")
+                return []
+
+            for row in reader:
+                if row["Name"].strip() == "" or row["Score"].strip() == "":
+                    continue
+
+                try:
+                    score = float(row["Score"])
+                    records.append({
+                        "Name": row["Name"].strip(),
+                        "Score": score
+                    })
+                except ValueError:
+                    print("Skipping a record with an invalid score.")
+
+    except FileNotFoundError:
+        print("Error: Input file was not found.")
+
+    return records
 
 
-# ── Core Functions ─────────────────────────────────────────────────────────────
-# Break your project into small, clearly named functions.
-# Each function should do one thing.
+def calculate_report(records):
+    if not records:
+        return None
+
+    scores = [record["Score"] for record in records]
+
+    report = {
+        "count": len(records),
+        "average": sum(scores) / len(scores),
+        "highest": max(scores),
+        "lowest": min(scores)
+    }
+
+    return report
+
+
+def write_report(report, output_path):
+    if report is None:
+        print("No data to write.")
+        return
+
+    try:
+        with open(output_path, "w") as file:
+            file.write("STUDENT SCORE REPORT\n")
+            file.write("====================\n")
+            file.write(f"Number of records: {report['count']}\n")
+            file.write(f"Average score: {report['average']:.2f}\n")
+            file.write(f"Highest score: {report['highest']}\n")
+            file.write(f"Lowest score: {report['lowest']}\n")
+
+        print("Report created successfully.")
+
+    except OSError as error:
+        print("Error writing report:", error)
+
 
 def process(input_path, output_path):
-    # TODO: implement your chosen project logic here
-    pass
+    records = read_scores(input_path)
+    report = calculate_report(records)
+    write_report(report, output_path)
 
 
-# ── Main ──────────────────────────────────────────────────────────────────────
 def main():
     print("Starting automation...")
     process(INPUT_PATH, OUTPUT_PATH)

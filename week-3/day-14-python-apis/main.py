@@ -1,40 +1,59 @@
 # Day 14 — Python and APIs
-# Task: Build a Python program that retrieves information from an API
-# and processes the JSON response to produce a useful output.
-# Submit this script + a screenshot of the printed output.
 
 import requests
 import os
 
-# Load your API key from the environment (never hardcode it here).
-# Copy .env.example to .env and fill in your key before running.
 API_KEY = os.getenv("API_KEY", "")
-BASE_URL = ""  # TODO: set your chosen API's base URL
+BASE_URL = "https://geocoding-api.open-meteo.com/v1/search"
 
 
-# ── Step 1: Fetch Data ────────────────────────────────────────────────────────
-# Make a GET request to the API and return the parsed JSON response.
-# Handle network errors and non-200 status codes gracefully.
-
+# Fetch data from the API
 def fetch_data(query):
-    # TODO: build params dict and call requests.get()
-    # TODO: check response.status_code before calling .json()
-    pass
+    params = {
+        "name": query,
+        "count": 1,
+        "language": "en",
+        "format": "json"
+    }
+
+    try:
+        response = requests.get(BASE_URL, params=params)
+
+        print("Status code:", response.status_code)
+        print("Request URL:", response.url)
+
+        if response.status_code != 200:
+            print("Request failed.")
+            return None
+
+        data = response.json()
+        return data
+
+    except requests.exceptions.RequestException as error:
+        print("Network error:", error)
+        return None
 
 
-# ── Step 2: Parse and Display ─────────────────────────────────────────────────
-# Extract at least 3 useful pieces of information from the response.
-# Print them in a clear, labelled format — not raw JSON.
-
+# Display useful information from the API
 def display_results(data):
-    # TODO: navigate the JSON structure and print each field with a label
-    pass
+    if "results" not in data or not data["results"]:
+        print("No results found.")
+        return
+
+    location = data["results"][0]
+
+    print("\n--- Location Information ---")
+    print("Name:", location.get("name"))
+    print("Country:", location.get("country"))
+    print("Latitude:", location.get("latitude"))
+    print("Longitude:", location.get("longitude"))
 
 
-# ── Main ──────────────────────────────────────────────────────────────────────
 def main():
-    query = input("Enter your search query: ")
+    query = input("Enter a city or location: ")
+
     data = fetch_data(query)
+
     if data:
         display_results(data)
 

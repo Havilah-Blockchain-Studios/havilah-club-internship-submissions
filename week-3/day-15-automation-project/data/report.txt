@@ -1,0 +1,6 @@
+STUDENT SCORE REPORT
+====================
+Number of records: 7
+Average score: 76.29
+Highest score: 93.0
+Lowest score: 55.0
