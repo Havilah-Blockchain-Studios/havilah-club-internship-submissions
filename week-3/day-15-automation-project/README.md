@@ -2,27 +2,29 @@
 
 ## What does this project do?
 
-<!-- Describe your project in 2-3 sentences. What problem does it solve? What does it automate? -->
+This project automates the parsing and statistical analysis of student performance records stored in CSV files. It eliminates manual data calculation by automatically filtering out missing or corrupted entries, computing key statistics (total count, average score, maximum, and minimum scores), and outputting a formatted text report.
 
 ## Project Type
 
-<!-- State which option you chose: File Organiser / Report Generator / Data Cleaner -->
+Report Generator
 
 ## Requirements
 
-<!-- List any Python libraries needed beyond the standard library -->
-
-```
-# example
-pip install <library-name>
-```
+No external libraries are required. The script relies strictly on Python standard library modules (`csv` and `os`).
 
 ## How to run
 
 ```bash
 python main.py
-```
 
-## Example output
+## Example Output
+========================================
+        STUDENT PERFORMANCE REPORT      
+========================================
+Total Valid Records Analyzed : 10
+Average Score                : 77.25
+Highest Score                : 95.0 (Tunde Bakare, Victor Chukwudi)
+Lowest Score                 : 45.0 (Blessing Egbe)
+========================================
 
-<!-- Paste or screenshot the output your script produces when run on the sample data -->
+Report successfully generated at: data/output/report.txt
