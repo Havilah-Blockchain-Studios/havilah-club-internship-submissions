@@ -2,27 +2,43 @@
 
 ## What does this project do?
 
-<!-- Describe your project in 2-3 sentences. What problem does it solve? What does it automate? -->
+This project automates file management by scanning a messy folder, reading each file's extension, and automatically moving it into a corresponding subfolder. It saves time and keeps directories clean and organized
 
 ## Project Type
 
-<!-- State which option you chose: File Organiser / Report Generator / Data Cleaner -->
+File Organiser
+
+## Project Planning (Input → Process → Output → Edge Cases)
+- **Input:** A folder named `data/` containing test files with various extensions
+- **Process:** The script validates the folder path, loops through items, extracts file extensions, creates subfolders dynamically, and moves files using `shutil`
+- **Output:** Neatly organized subfolders inside the data directory grouped by file extension
+- **Edge Cases Handled:** 
+  1. Missing input folder validation (prevents crashes)
+  2. Skipping files without extensions (such as `.gitkeep`) safely
 
 ## Requirements
 
-<!-- List any Python libraries needed beyond the standard library -->
+This project uses only Python's built-in standard libraries, so no extra installations are required
 
 ```
-# example
-pip install <library-name>
-```
+- `os`
+- `shutil`
 
 ## How to run
 
 ```bash
-python main.py
+python week-3/day-15-automation-project/main.py
 ```
 
 ## Example output
 
-<!-- Paste or screenshot the output your script produces when run on the sample data -->
+ Starting automation...
+Skipped (no extension): .gitkeep
+Moved: notes.txt -> txt/
+Moved: picture.png -> png/
+Moved: report.pdf -> pdf/
+Moved: script.py -> py/
+Moved: table.csv -> csv/
+Automation finished successfully.
+
+

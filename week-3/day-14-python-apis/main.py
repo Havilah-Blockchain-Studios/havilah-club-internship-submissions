@@ -3,13 +3,15 @@
 # and processes the JSON response to produce a useful output.
 # Submit this script + a screenshot of the printed output.
 
+from dotenv import load_dotenv
+load_dotenv()
 import requests
 import os
 
 # Load your API key from the environment (never hardcode it here).
 # Copy .env.example to .env and fill in your key before running.
 API_KEY = os.getenv("API_KEY", "")
-BASE_URL = ""  # TODO: set your chosen API's base URL
+BASE_URL = "https://api.nasa.gov/planetary/apod"
 
 
 # ── Step 1: Fetch Data ────────────────────────────────────────────────────────
@@ -19,7 +21,19 @@ BASE_URL = ""  # TODO: set your chosen API's base URL
 def fetch_data(query):
     # TODO: build params dict and call requests.get()
     # TODO: check response.status_code before calling .json()
-    pass
+    params = {
+        "api_key": API_KEY
+    }
+    try:
+        response = requests.get(BASE_URL, params=params)
+        if response.status_code == 200:
+            return response.json()
+        else:
+            print("Error: Status code", response.status_code)
+            return None
+    except requests.exceptions.RequestException as e:
+        print("Network error occurred:", e)
+        return None
 
 
 # ── Step 2: Parse and Display ─────────────────────────────────────────────────
@@ -28,7 +42,12 @@ def fetch_data(query):
 
 def display_results(data):
     # TODO: navigate the JSON structure and print each field with a label
-    pass
+    if data:
+        print("\n--- NASA Picture of the Day ---")
+        print("Title:", data.get("title"))
+        print("Date:", data.get("date"))
+        print("Media Type:", data.get("media_type"))
+        print("URL:", data.get("url"))
 
 
 # ── Main ──────────────────────────────────────────────────────────────────────

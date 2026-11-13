@@ -6,13 +6,13 @@ Fill in every field below before your first commit. This file is how instructors
 
 | Field | Your Answer |
 |-------|-------------|
-| Full Name | |
-| GitHub Username | |
-| Email Address | |
-| Phone / WhatsApp | |
+| Full Name | NWOKEDI THANKGOD SOPURUCHUKWU |
+| GitHub Username | TG090 |
+| Email Address | nwokedithankgod090@gmail.com |
+| Phone / WhatsApp | 09047527017 |
 | Cohort | Havilah Club Internship — Cohort |
-| Programme Start Date | |
-| LinkedIn Profile | |
+| Programme Start Date | 7TH SEPTEMBER, 2026. |
+| X Profile | https://x.com/VoidX_09 |
 
 ---
 
@@ -22,7 +22,7 @@ Write 2–3 sentences describing what you specifically want to be able to do by 
 
 > Replace this line with your learning objective.
 
----
+-I would love to develop a practical skill in AI, automation, robotics and Coding. I would also love to be able to make a simple project from the scratch without the use of YouTube.
 
 ## How to update this file
 
